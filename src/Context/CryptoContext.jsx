@@ -6,40 +6,41 @@ const CryptoContextProvider = (props) => {
   const [cryptoList, setCryptoList] = useState([]);
   const [filteredCryptos, setFilteredCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
   const [CurrentCurrency, setCurrentCurrency] = useState({
     name: "usd",
     symbol: "$",
   });
 
-const fetchCryptoData = async () => {
-  try {
-    const res = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${CurrentCurrency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h`
-    );
+  useEffect(() => {
+    let ignore = false;
 
-    const data = await res.json();
-    console.log("API DATA:", data);
+    const fetchCryptoData = async () => {
+      try {
+        const res = await fetch(
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${CurrentCurrency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h`
+        );
 
+        const data = await res.json();
 
-    setCryptoList(data);
-    setFilteredCryptos(data);
+        if (!ignore) {
+          setCryptoList(data);
+          setFilteredCryptos(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-
- useEffect(() => {
-  fetchCryptoData();
-
-  const interval = setInterval(() => {
     fetchCryptoData();
-  }, 30000); // every 30 sec
 
-  return () => clearInterval(interval);
-}, [CurrentCurrency]);
+    const interval = setInterval(fetchCryptoData, 30000);
 
+    return () => {
+      ignore = true;
+      clearInterval(interval);
+    };
+  }, [CurrentCurrency]);
 
   useEffect(() => {
     if (searchTerm.trim() === "") {

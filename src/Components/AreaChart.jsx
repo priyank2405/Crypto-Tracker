@@ -2,7 +2,6 @@ import React from "react";
 import Chart from "react-google-charts";
 
 const AreaChart = ({ historicalData, currencySymbol }) => {
-
   const data = historicalData?.prices
     ? [
         ["Date", "Price"],
@@ -17,33 +16,37 @@ const AreaChart = ({ historicalData, currencySymbol }) => {
     backgroundColor: "transparent",
     legend: "none",
     curveType: "function",
+
     hAxis: {
-      textStyle: { color: "#FFFFFF" },
-      gridlines: { color: "#444444" },
+      textStyle: { color: "#848E9C" },
+      gridlines: { color: "#2B3139" },
       format: "MMM dd",
     },
+
     vAxis: {
-      textStyle: { color: "#FFFFFF" },
-      gridlines: { color: "#444444" },
+      textStyle: { color: "#848E9C" },
+      gridlines: { color: "#2B3139" },
       format: `${currencySymbol}#,##0.00`,
     },
+
     chartArea: {
-      width: "90%",
-      height: "80%",
+      width: "92%",
+      height: "78%",
     },
-    colors: ["#10B981"],
-    lineWidth: 3,
+
+    colors: ["#FCD535"],
+    lineWidth: 2,
   };
 
   return (
-    <div className="w-full bg-gray-800/20 rounded-xl border border-emerald-500/20">
+    <div className="w-full h-[420px] md:h-[520px] bg-[#151A21] border border-[#2B3139] rounded-xl p-4">
       <Chart
         chartType="AreaChart"
         width="100%"
         height="100%"
         data={data}
         options={options}
-        loader={<div className="text-emerald-400">Loading Chart...</div>}
+        loader={<div className="text-[#FCD535]">Loading Chart...</div>}
       />
     </div>
   );

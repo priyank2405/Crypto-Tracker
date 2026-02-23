@@ -12,7 +12,6 @@ const CoinPage = () => {
   const [chartData, setChartData] = useState(null);
   const [period, setPeriod] = useState("10");
 
-  // Fetch coin details
   useEffect(() => {
     const fetchCoin = async () => {
       try {
@@ -29,7 +28,6 @@ const CoinPage = () => {
     fetchCoin();
   }, [cryptoId]);
 
-  // Fetch chart data
   useEffect(() => {
     const fetchChart = async () => {
       try {
@@ -48,42 +46,44 @@ const CoinPage = () => {
 
   if (!coinDetails || !chartData) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-[#0B0E11] text-[#EAECEF]">
         Loading coin data...
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-[5%] py-8">
+    <div className="min-h-screen bg-[#0B0E11] text-[#EAECEF] px-[6%] py-10">
 
-      {/* Top coin info */}
-      <div className="flex items-center gap-4 mb-6 bg-gray-800 p-4 rounded-xl">
+      <div className="flex items-center gap-4 mb-8 bg-[#151A21] border border-[#2B3139] p-6 rounded-xl shadow-sm">
         <img
           src={coinDetails.image?.large}
           alt={coinDetails.name}
           className="w-16 h-16"
         />
         <div>
-          <h1 className="text-3xl font-bold text-emerald-400">
+          <h1 className="text-3xl font-bold text-[#FCD535]">
             {coinDetails.name}
           </h1>
-          <p className="text-gray-400">
+          <p className="text-[#848E9C]">
             ({coinDetails.symbol?.toUpperCase()})
           </p>
-          <p className="text-sm">Rank #{coinDetails.market_cap_rank}</p>
+          <p className="text-sm text-[#848E9C]">
+            Rank #{coinDetails.market_cap_rank}
+          </p>
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="bg-gray-800 p-4 rounded-xl mb-6">
-        <div className="flex justify-between mb-3">
-          <h2 className="text-lg text-emerald-400">Price Chart</h2>
+      <div className="bg-[#151A21] border border-[#2B3139] p-6 rounded-xl mb-8">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg text-[#FCD535] font-semibold tracking-wide">
+            Price Chart
+          </h2>
 
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
-            className="bg-gray-900 px-3 py-1 rounded"
+            className="bg-[#0B0E11] border border-[#2B3139] px-4 py-1.5 rounded-lg text-sm focus:outline-none focus:border-[#FCD535]"
           >
             <option value="1">24H</option>
             <option value="7">7D</option>
@@ -99,13 +99,11 @@ const CoinPage = () => {
         />
       </div>
 
-      {/* Stats */}
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-3 gap-6">
 
-        {/* price */}
-        <div className="bg-gray-800 p-4 rounded-xl">
-          <p className="text-gray-400">Current Price</p>
-          <p className="text-2xl text-emerald-400 font-bold">
+        <div className="bg-[#151A21] border border-[#2B3139] p-6 rounded-xl hover:border-[#FCD535]/40 transition">
+          <p className="text-[#848E9C] text-sm mb-1">Current Price</p>
+          <p className="text-2xl text-[#FCD535] font-bold">
             {CurrentCurrency.symbol}
             {coinDetails.market_data.current_price[
               CurrentCurrency.name
@@ -113,10 +111,9 @@ const CoinPage = () => {
           </p>
         </div>
 
-        {/* market cap */}
-        <div className="bg-gray-800 p-4 rounded-xl">
-          <p className="text-gray-400">Market Cap</p>
-          <p className="text-2xl text-emerald-400 font-bold">
+        <div className="bg-[#151A21] border border-[#2B3139] p-6 rounded-xl hover:border-[#FCD535]/40 transition">
+          <p className="text-[#848E9C] text-sm mb-1">Market Cap</p>
+          <p className="text-2xl text-[#FCD535] font-bold">
             {CurrentCurrency.symbol}
             {coinDetails.market_data.market_cap[
               CurrentCurrency.name
@@ -124,19 +121,19 @@ const CoinPage = () => {
           </p>
         </div>
 
-        {/* 24h change */}
-        <div className="bg-gray-800 p-4 rounded-xl">
-          <p className="text-gray-400">24h Change</p>
+        <div className="bg-[#151A21] border border-[#2B3139] p-6 rounded-xl hover:border-[#FCD535]/40 transition">
+          <p className="text-[#848E9C] text-sm mb-1">24h Change</p>
           <p
             className={`text-2xl font-bold ${
               coinDetails.market_data.price_change_percentage_24h > 0
-                ? "text-green-400"
-                : "text-red-400"
+                ? "text-[#0ECB81]"
+                : "text-[#F6465D]"
             }`}
           >
             {coinDetails.market_data.price_change_percentage_24h.toFixed(2)}%
           </p>
         </div>
+
       </div>
     </div>
   );

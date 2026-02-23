@@ -29,18 +29,18 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 px-[5%] md:px-[8%] lg:px-[10%] py-5 bg-gray-900/80 backdrop-blur-md border-b border-gray-700/30 sticky top-0 z-50">
+    <nav className="flex items-center justify-between px-[8%] py-5 bg-[#0B0E11] border-b border-[#2B3139] sticky top-0 z-50">
 
       <div className="flex items-center gap-2">
-        <Coins className="w-8 h-8 text-emerald-400" />
-        <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+        <Coins className="w-8 h-8 text-[#FCD535]" />
+        <span className="text-xl font-bold text-[#FCD535]">
           CryptoTracker
         </span>
       </div>
 
       <form
         onSubmit={searchHandler}
-        className="w-full md:w-auto flex-1 max-w-2xl relative"
+        className="w-full max-w-2xl relative"
       >
         <div className="relative flex items-center">
           <input
@@ -48,22 +48,22 @@ export const Navbar = () => {
             placeholder="Search crypto..."
             value={input}
             onChange={inputHandler}
-            className="w-full px-6 py-3 bg-gray-800/60 border border-gray-600/30 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500/50 placeholder-gray-400 text-gray-200"
+            className="w-full px-6 py-3 bg-[#151A21] border border-[#2B3139] rounded-full focus:outline-none focus:ring-1 focus:ring-[#FCD535] text-[#EAECEF]"
           />
           <button
             type="submit"
-            className="absolute right-2 px-4 py-1.5 bg-gradient-to-r from-emerald-600 to-cyan-600 text-white rounded-full"
+            className="absolute right-2 px-4 py-1.5 bg-[#FCD535] text-black rounded-full"
           >
             <Search className="w-4 h-4" />
           </button>
         </div>
 
         {filteredCoins.length > 0 && (
-          <ul className="absolute w-full bg-gray-800 border border-gray-700 mt-2 rounded-lg shadow-xl z-10">
+          <ul className="absolute w-full bg-[#151A21] border border-[#2B3139] mt-2 rounded-lg shadow-xl z-10">
             {filteredCoins.map((coin, idx) => (
               <li
                 key={idx}
-                className="px-4 py-2 hover:bg-emerald-600/30 cursor-pointer text-gray-100"
+                className="px-4 py-2 hover:bg-[#1E2329] cursor-pointer"
                 onClick={() => {
                   setInput(coin.name);
                   setFilteredCoins([]);

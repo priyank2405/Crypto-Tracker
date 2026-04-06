@@ -39,7 +39,7 @@ const AreaChart = ({ historicalData, currencySymbol }) => {
   };
 
   return (
-    <div className="w-full h-[420px] md:h-[520px] bg-[#151A21] border border-[#2B3139] rounded-xl p-4">
+    <div className="w-full h-105 md:h-130 bg-[#151A21] border border-[#2B3139] rounded-xl p-4">
       <Chart
         chartType="AreaChart"
         width="100%"
